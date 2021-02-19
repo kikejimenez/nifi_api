@@ -20,10 +20,12 @@ class Connection:
             return "No JSON available", res
 
     @classmethod
-    def get(cls, processor_id):
+    def list_queues(cls, processor_id):
         url = nifi_api + processor_id
         res = requests.get(url, auth=CLOUDERA_CREDENTIALS)
         return cls.custom_response(res)
+
+
 
     @classmethod
     def update_run_status(cls, processor_id, clientId, state="STOPPED"):
