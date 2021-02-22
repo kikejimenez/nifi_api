@@ -4,42 +4,61 @@ __all__ = ['Processor', 'Connection', 'Flowfile']
 
 # Cell
 import requests
-import nifi_api as na
-from .endpoints import *
-from .tools import custom_response
 import json
+from .environment import NifiEndpoint, Credentials
+from .tools import custom_response
 
 # Cell
+
+
 class Processor:
 
-    nifi_api = NIFI_API_PROCESSORS
+    nifi_api = NifiEndpoint.processors
 
-    @classmethod
-    def get(cls, processor_id):
-        url = nifi_api + processor_id
-        res = requests.get(url, auth=CLOUDERA_CREDENTIALS)
+    def __init__(self, processor_id: str) -> None:
+        self.processor_id = processor_id
+
+    def get_state(self) -> None:
+        self.state, _ = self.get(self.processor_id)
+        self.client_id = self.state['revision']['clientId']
+
+    def get(self, processor_id) -> tuple:
+        url = self.nifi_api + processor_id
+        res = requests.get(url, auth=Credentials.credentials)
         return custom_response(res)
 
-    @classmethod
-    def update_run_status(cls, processor_id, clientId, state="STOPPED"):
+    def update_run_status(self, state) -> tuple:
+        """
+Change the status of the processor.
+
+ Attributes
+----------
+state : str
+     The possible values are: "RUNNING", "STOPPED", "DISABLED".
+
+ Returns
+----------
+ custom_response : tuple
+   The response as defined in tools module
+"""
+
+        self.get_state()
 
         data = {
             "revision": {
-                'clientId': clientId,
+                'clientId': self.client_id,
                 'version': 1
             },
             "state": state,
             "disconnectedNodeAcknowledged": True
         }
 
-        url = nifi_api + f"{processor_id}/run-status"
+        url = self.nifi_api + f"{self.processor_id}/run-status"
 
-        res = requests.put(
-            url,
-            data=data,
-            auth=CLOUDERA_CREDENTIALS,
-            headers={'content-type': 'application/json'}
-        )
+        res = requests.put(url,
+                           data=json.dumps(data),
+                           auth=Credentials.credentials,
+                           headers={'content-type': 'application/json'})
         return custom_response(res)
 
 # Cell
@@ -85,15 +104,15 @@ class Flowfile:
     nifi_api = NIFI_API_FLOWFILE_QUEUES
 
     @classmethod
-    def listing_request(cls,connection_id):
+    def listing_request(cls, connection_id):
         url = cls.nifi_api + f"{connection_id}/listing-requests"
         res = requests.post(url, auth=CLOUDERA_CREDENTIALS)
         return custom_response(res)
 
     @classmethod
-    def list_queues(cls,connection_id):
-        listing_request,_ = cls.listing_request(connection_id)
-        listing_request_id  = listing_request["listingRequest"]['id']
+    def list_queues(cls, connection_id):
+        listing_request, _ = cls.listing_request(connection_id)
+        listing_request_id = listing_request["listingRequest"]['id']
         url = cls.nifi_api + f"{connection_id}/listing-requests/{listing_request_id}"
         res = requests.get(url, auth=CLOUDERA_CREDENTIALS)
         return custom_response(res)

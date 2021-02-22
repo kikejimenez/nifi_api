@@ -1,0 +1,27 @@
+{
+    "NifiIds": {
+        "SourceToRaw": {
+            "in_connection": {
+                "type": "S3ListSuccessConnection",
+                "Id": "a9bc3f88-5f2d-1559-9c2d-625d8a66e5c8",
+                "description": "List the files of the S3 bucket. Sucess relationship"
+            },
+            "in_processor": {
+                "type": "RouteOnFilenameProcessorIn",
+                "Id": "1ac4364b-5f00-16b3-aee1-e15d8ad527ff",
+                "description": "Filters a list of CSVs"
+            },
+            "out_connection": {
+                "type": "AttributeToJSON",
+                "Id": "41322056-0177-1000-ffff-ffffd3ed59f7",
+                "description": "Logs JSON. Sucess Relationship"
+            },
+            "out_processor": {
+                "type": "PutS3Object",
+                "Id": "4124d10c-0177-1000-0000-00000eac98e2",
+                "description": "Put the lof files in the S3 bucket. "
+            }
+        }
+    },
+    "seconds_between_checks": 60
+}
