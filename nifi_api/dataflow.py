@@ -3,50 +3,50 @@
 __all__ = ['DataFlow']
 
 # Cell
-from .endpoints import *
-from .rest import Flowfile, Processor
-from .tools import get_valid_uuids_in_connector
+
+import time
+
+from .environment import Vars, NifiIds
+from .rest import Flowfiles, Processor
 
 # Cell
+
+
 class DataFlow:
     """
-Parameters
---------
+    Monitors and controls a Nifi dataflow. The process starts
+    when the **run** method is called.
+
+    Parameters
+   -------------
+
+      dataFlowIds: DataFlowIds
+        data structure that contains all the IDs of the in/out
+        processors and connections
+
 """
 
     def __init__(
         self,
-        in_connection_id: str,
-        out_connection_id: str,
-        in_processor_id: str,
-        out_processor_id: str,
+        dataFlowIds: object,
     ) -> None:
-        self.in_connection_id = in_connection_id
-        self.out_connection_id = out_connection_id
-        self.in_processor = Processor('in_processor_id')
-        self.out_processor = Processor('out_processor_id')
+        self.in_processor = Processor(dataFlowIds.in_processor)
+        self.out_processor = Processor(dataFlowIds.out_processor)
+        self.in_flowfiles = Flowfiles(dataFlowIds.in_connection)
+        self.out_flowfiles = Flowfiles(dataFlowIds.out_connection)
 
-    def is_done(self) -> bool:
-        return set(self.in_flowfiles) == set(self.out_flowfiles)
+    def run(self) -> None:
 
-    def get_incoming_flowfiles(self) -> None:
-        queues = Flowfile.list_queues(self.in_connection_id)
-        self.in_flowfiles = get_valid_uuids_in_connector(queues)
-
-    def get_outcoming_flowfiles(self) -> None:
-        queues = Flowfile.list_queues(self.out_connection_id)
-        self.out_flowfiles = get_valid_uuids_in_connector(queues)
-
-    def lifecycle(self) -> None:
-
-        self.get_incoming_flowfiles()
+        self.in_flowfiles.get_ids()
         self.out_processor.update_run_status("STOPPED")
         self.in_processor.update_run_status("RUNNING")
         while True:
 
-            self.get_outcoming_flowfiles()
+            self.out_flowfiles.get_ids()
 
-            if self.is_done():
+            if self.in_flowfiles.equals(self.out_flowfiles):
                 self.in_processor.update_run_status("STOPPED")
                 self.out_processor.update_run_status("RUNNING")
+                print("Pipeline watching has finished ...")
                 break
+            time.sleep(Vars.seconds_between_checks)

@@ -23,5 +23,5 @@
             }
         }
     },
-    "seconds_between_checks": 60
+    "SecondsBetweenChecks": 15
 }
