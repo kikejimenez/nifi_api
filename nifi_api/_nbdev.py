@@ -10,6 +10,7 @@ index = {"Credentials": "01_environment.ipynb",
          "Processor": "02_rest.ipynb",
          "Flowfiles": "02_rest.ipynb",
          "DataFlow": "03_dataflow.ipynb",
+         "source_to_refined": "04_source_to_refined.ipynb",
          "custom_response": "09_tools.ipynb",
          "is_valid_csv": "09_tools.ipynb",
          "get_valid_names_in_connector": "09_tools.ipynb"}
@@ -17,6 +18,7 @@ index = {"Credentials": "01_environment.ipynb",
 modules = ["environment.py",
            "rest.py",
            "dataflow.py",
+           "source_to_refined.py",
            "tools.py"]
 
 doc_url = "https://kikejimenez.github.io/nifi_api/"

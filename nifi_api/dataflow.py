@@ -14,7 +14,7 @@ from .rest import Flowfiles, Processor
 
 class DataFlow:
     """
-    Monitors and controls a Nifi dataflow. The process starts
+    Monitors and controls a Nifi dataflow. The dataflow starts
     when the **run** method is called.
 
     Parameters
@@ -31,21 +31,27 @@ class DataFlow:
         dataFlowIds: object,
     ) -> None:
         self.in_processor = Processor(dataFlowIds.in_processor)
-        self.out_processor = Processor(dataFlowIds.out_processor)
         self.in_flowfiles = Flowfiles(dataFlowIds.in_connection)
+        self.middle_processor = Processor(dataFlowIds.middle_processor)
+        self.out_processor = Processor(dataFlowIds.out_processor)
         self.out_flowfiles = Flowfiles(dataFlowIds.out_connection)
 
     def run(self) -> None:
 
-        self.in_flowfiles.get_ids()
         self.out_processor.update_run_status("STOPPED")
         self.in_processor.update_run_status("RUNNING")
+        time.sleep(Vars.seconds_after_start)
+        self.in_flowfiles.get_ids()
+        self.middle_processor.update_run_status("RUNNING")
+        self.in_processor.update_run_status("STOPPED")
+
         while True:
 
             self.out_flowfiles.get_ids()
 
             if self.in_flowfiles.equals(self.out_flowfiles):
-                self.in_processor.update_run_status("STOPPED")
+
+                self.middle_processor.update_run_status("STOPPED")
                 self.out_processor.update_run_status("RUNNING")
                 print("Pipeline watching has finished ...")
                 break

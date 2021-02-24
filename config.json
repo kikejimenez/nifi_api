@@ -4,24 +4,86 @@
             "in_connection": {
                 "type": "S3ListSuccessConnection",
                 "Id": "a9bc3f88-5f2d-1559-9c2d-625d8a66e5c8",
-                "description": "List the files of the S3 bucket. Sucess relationship"
+                "description": "List the files of the S3 bucket. Success relationship"
             },
             "in_processor": {
+                "type": "ListS3",
+                "Id": "a7c239be-c5f8-1edf-93a3-e4f76c891683",
+                "description": "List of CSVs from the S3 bucker"
+            },
+            "middle_processor": {
                 "type": "RouteOnFilenameProcessorIn",
                 "Id": "1ac4364b-5f00-16b3-aee1-e15d8ad527ff",
                 "description": "Filters a list of CSVs"
             },
             "out_connection": {
-                "type": "AttributeToJSON",
+                "type": "AttributeToJSONSuccessConnection",
                 "Id": "41322056-0177-1000-ffff-ffffd3ed59f7",
-                "description": "Logs JSON. Sucess Relationship"
+                "description": "Logs JSON. Success Relationship"
             },
             "out_processor": {
                 "type": "PutS3Object",
                 "Id": "4124d10c-0177-1000-0000-00000eac98e2",
-                "description": "Put the lof files in the S3 bucket. "
+                "description": "Put the log files in the S3 bucket. "
+            }
+        },
+        "RawToDiscovery": {
+            "in_connection": {
+                "type": "FunnelSuccessConnection",
+                "Id": "fd5b3bdc-c7bf-131b-ffff-ffff93b90bde",
+                "description": "Funnel Success Relationship"
+            },
+            "in_processor": {
+                "type": "GenerateFlowfile",
+                "Id": "96d3413e-94ee-10f9-ffff-ffff8eb3cd09",
+                "description": "Generates Random Flowfile"
+            },
+            "middle_processor": {
+                "type": "ReplaceText",
+                "Id": "e92337d6-4f1e-110d-a161-39ac6f9d52af",
+                "description": "Prepares Hive Query"
+            },
+            "out_connection": {
+                "type": "AttributeToJSONSuccess",
+                "Id": "454cc5c1-0177-1000-0000-00002d616ddf",
+                "description": "Logs JSON. Success Relationship"
+            },
+            "out_processor": {
+                "type": "PutS3Object",
+                "Id": "d59939a0-5dd7-1084-8e35-e35aa0356dc0",
+                "description": "Put the log files in the S3 bucket. "
+            }
+        },
+        "DiscoveryToRefined": {
+            "in_connection": {
+                "type": "FunnelSuccessConnection",
+                "Id": "18123c61-ed7b-17c5-b8f4-d8dc29a590aa",
+                "description": "Funnel Success Relationship"
+            },
+            "in_processor": {
+                "type": "GenerateFlowfile",
+                "Id": "0f523124-bcaa-1cd9-9b93-2129daa5e3ca",
+                "description": "Generates Random Flowfile"
+            },
+            "middle_processor": {
+                "type": "ReplaceText",
+                "Id": "c8c73644-44dd-1e58-87c9-4e3b4212b8d4",
+                "description": "Prepares Hive Query"
+            },
+            "out_connection": {
+                "type": "AttributeToJSONSuccess",
+                "Id": "4c1530fc-4b89-1cd6-bfcf-839c03549b01",
+                "description": "Logs JSON. Success Relationship"
+            },
+            "out_processor": {
+                "type": "PutS3Object",
+                "Id": "1a563fc6-1709-113e-a5fb-9df2ecc193a1",
+                "description": "Put the log files in the S3 bucket. "
             }
         }
     },
-    "SecondsBetweenChecks": 15
+    "DelaySeconds": {
+        "AfterStart": 15,
+        "BetweenChecks": 15
+    }
 }
