@@ -17,14 +17,14 @@
                 "description": "Filters a list of CSVs"
             },
             "out_connection": {
-                "type": "AttributeToJSONSuccessConnection",
-                "Id": "41322056-0177-1000-ffff-ffffd3ed59f7",
-                "description": "Logs JSON. Success Relationship"
+                "type": "UpdateAttributeSuccessConnection",
+                "Id": "40863fe7-b369-1764-ffff-ffffa80af25c",
+                "description": "Source and Fails Update Attributes. Success relationship "
             },
             "out_processor": {
-                "type": "PutS3Object",
-                "Id": "4124d10c-0177-1000-0000-00000eac98e2",
-                "description": "Put the log files in the S3 bucket. "
+                "type": "AttributeToJSON",
+                "Id": "4131c50d-0177-1000-ffff-ffff85db5961",
+                "description": "Logs JSON generates JSON for S3 bucket"
             }
         },
         "RawToDiscovery": {
@@ -44,14 +44,14 @@
                 "description": "Prepares Hive Query"
             },
             "out_connection": {
-                "type": "AttributeToJSONSuccess",
-                "Id": "454cc5c1-0177-1000-0000-00002d616ddf",
-                "description": "Logs JSON. Success Relationship"
+                "type": "UpdateAttributeSuccessConnection",
+                "Id": "d65f1c5e-0177-1000-ffff-ffff8ba6df7c",
+                "description": "Success and Failure Update Attributes. Success relationship "
             },
             "out_processor": {
-                "type": "PutS3Object",
-                "Id": "d59939a0-5dd7-1084-8e35-e35aa0356dc0",
-                "description": "Put the log files in the S3 bucket. "
+                "type": "AttributeToJSON",
+                "Id": "52ff3126-3168-1401-b50e-1e518ede7f6e",
+                "description": "Logs JSON generates JSON for S3 bucket"
             }
         },
         "DiscoveryToRefined": {
@@ -71,14 +71,14 @@
                 "description": "Prepares Hive Query"
             },
             "out_connection": {
-                "type": "AttributeToJSONSuccess",
-                "Id": "4c1530fc-4b89-1cd6-bfcf-839c03549b01",
-                "description": "Logs JSON. Success Relationship"
+                "type": "UpdateAttributeSuccessConnection",
+                "Id": "d6618a64-0177-1000-ffff-ffffaaec680b",
+                "description": "Success and Failure Update Attributes. Success relationship "
             },
             "out_processor": {
-                "type": "PutS3Object",
-                "Id": "1a563fc6-1709-113e-a5fb-9df2ecc193a1",
-                "description": "Put the log files in the S3 bucket. "
+                "type": "AttributeToJSON",
+                "Id": "25523a30-b39d-120c-b101-8251de7fe787",
+                "description": "Logs JSON generates JSON for S3 bucket"
             }
         }
     },

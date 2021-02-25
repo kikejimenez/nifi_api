@@ -1,0 +1,10 @@
+{
+  "nifi_api": {
+    "Overview": "/",
+    "Environment": "environment.html",
+    "REST": "rest.html",
+    "Dataflow": "dataflow.html",
+    "Source To Refined": "source_to_refined.html",
+    "Tools": "tools.html"
+  }
+}
