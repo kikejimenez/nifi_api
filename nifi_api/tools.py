@@ -4,7 +4,6 @@ __all__ = ['custom_response', 'is_valid_csv', 'get_valid_names_in_connector']
 
 # Cell
 import json
-from .environment import Vars
 
 # Cell
 

@@ -6,7 +6,6 @@ __all__ = ['DataFlow']
 
 import time
 
-from .environment import Vars, NifiIds
 from .rest import Flowfiles, Processor
 
 # Cell
@@ -28,19 +27,26 @@ class DataFlow:
 
     def __init__(
         self,
-        dataFlowIds: object,
+        dataflow_ids: object,
+        delay_seconds_after_start: int = 14,
+        delay_seconds_between_checks: int = 15,
     ) -> None:
-        self.in_processor = Processor(dataFlowIds.in_processor)
-        self.in_flowfiles = Flowfiles(dataFlowIds.in_connection)
-        self.middle_processor = Processor(dataFlowIds.middle_processor)
-        self.out_processor = Processor(dataFlowIds.out_processor)
-        self.out_flowfiles = Flowfiles(dataFlowIds.out_connection)
+        self.in_processor = Processor(dataflow_ids.in_processor)
+        self.in_flowfiles = Flowfiles(dataflow_ids.in_connection)
+        self.middle_processor = Processor(dataflow_ids.middle_processor)
+        self.out_processor = Processor(dataflow_ids.out_processor)
+        self.out_flowfiles = Flowfiles(dataflow_ids.out_connection)
+
+        self.seconds_after_start = delay_seconds_after_start
+        self.seconds_between_checks = delay_seconds_between_checks
 
     def run(self) -> None:
 
+        print('pipeline watching has started..')
+
         self.out_processor.update_run_status("STOPPED")
         self.in_processor.update_run_status("RUNNING")
-        time.sleep(Vars.seconds_after_start)
+        time.sleep(self.seconds_after_start)
         self.in_flowfiles.get_ids()
         self.middle_processor.update_run_status("RUNNING")
         self.in_processor.update_run_status("STOPPED")
@@ -55,4 +61,4 @@ class DataFlow:
                 self.out_processor.update_run_status("RUNNING")
                 print("Pipeline watching has finished ...")
                 break
-            time.sleep(Vars.seconds_between_checks)
+            time.sleep(self.seconds_between_checks)
