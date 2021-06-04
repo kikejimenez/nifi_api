@@ -1,5 +1,5 @@
 {
-  "nifi_api": {
+  "nifi_rest": {
     "Overview": "/",
     "Environment": "environment.html",
     "REST": "rest.html",

@@ -10,20 +10,21 @@ More specifically, it turns on an *initial processor* and records the flowfiles 
 
 The following example represents  the actions on the dataflow that get automated by the **nifi_api** library.
 
-1. The initial state of the dataflow:
+*1*. Consider the initial state of the dataflow:
 
 ![image.png](nbs/images/1_dataflow.png " initial state")
 
-2. Turn on the "Initial" processor and turn off the "Final" processor:
+*2*. Turn on the "Initial" processor and turn off the "Final" processor:
 
 ![Initial State](nbs/images/2_dataflow.png " middle state")
 
-3. Turn off the "Initial" processor and record the flowfiles in the "Initial" connection, then turn on the "Middle" processor:
+*3*. Turn off the "Initial" processor and record the flowfiles in the "Initial" connection, then turn on the "Middle" processor:
 
 ![Initial State](nbs/images/3_dataflow.png " final state")
 
-4. Record the flowfiles in the "Final" Connection, when they coincide with the "Initial" flowfile turn off the "Middle" processor and turn on the "Final" processor.
-5. The flowfiles in the "Final" connection get consumed by the "Final" processor and the initial state of the dataflow is recovered.
+*4*. Record the flowfiles in the "Final" Connection, when they coincide with the "Initial" flowfile turn off the "Middle" processor and turn on the "Final" processor.
+
+*5*. The flowfiles in the "Final" connection get consumed by the "Final" processor and the initial state of the dataflow is recovered.
 
 Here is a recording of the Nifi UI when the tool is being executed on this dataflow:
 
@@ -31,7 +32,7 @@ Here is a recording of the Nifi UI when the tool is being executed on this dataf
 
 ## Environment
 
-The Nifi cluster used for testing is in the *Cloudera Public Cloud* and needs basic authentication credentials for accessing. The following environmental variables are necessary to access the cluster:
+The Nifi cluster used for testing is in the *Cloudera Public Cloud* and needs basic authentication credentials for accessing. The following are the environment variables required to access the cluster:
 
       - CLOUDERA_USER=user
       - CLOUDERA_PASS=password
@@ -40,7 +41,7 @@ The Nifi cluster used for testing is in the *Cloudera Public Cloud* and needs ba
 
 ## Install
 
-For a `pip` installation run:
+**nipi_api** is in `pip` and can be installed by running:
 
 `pip install nifi-api`
 

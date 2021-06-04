@@ -10,6 +10,7 @@ index = {"Credentials": "01_environment.ipynb",
          "DataFlow": "03_dataflow.ipynb",
          "NifiIds": "04_source_to_refined.ipynb",
          "source_to_refined": "04_source_to_refined.ipynb",
+         "source_to_discovery": "04_source_to_refined.ipynb",
          "custom_response": "09_tools.ipynb",
          "is_valid_csv": "09_tools.ipynb",
          "get_valid_names_in_connector": "09_tools.ipynb"}
@@ -20,8 +21,8 @@ modules = ["environment.py",
            "source_to_refined.py",
            "tools.py"]
 
-doc_url = "https://kikejimenez.github.io/nifi_api/"
+doc_url = "https://kikejimenez.github.io/nifi_rest/"
 
-git_url = "https://github.com/kikejimenez/nifi_api/tree/main/"
+git_url = "https://github.com/kikejimenez/nifi_rest/tree/main/"
 
 def custom_doc_links(name): return None

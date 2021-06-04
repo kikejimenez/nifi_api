@@ -25,6 +25,6 @@ entries:
       title: Tools
       url: tools.html
     output: web
-    title: nifi_api
+    title: nifi_rest
   output: web
   title: Sidebar

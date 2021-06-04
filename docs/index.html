@@ -52,9 +52,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>The initial state of the dataflow:</li>
-</ol>
+<p><em>1</em>. Consider the initial state of the dataflow:</p>
 
 </div>
 </div>
@@ -68,9 +66,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Turn on the "Initial" processor and turn off the "Final" processor:</li>
-</ol>
+<p><em>2</em>. Turn on the "Initial" processor and turn off the "Final" processor:</p>
 
 </div>
 </div>
@@ -84,9 +80,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Turn off the "Initial" processor and record the flowfiles in the "Initial" connection, then turn on the "Middle" processor:</li>
-</ol>
+<p><em>3</em>. Turn off the "Initial" processor and record the flowfiles in the "Initial" connection, then turn on the "Middle" processor:</p>
 
 </div>
 </div>
@@ -100,10 +94,8 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ol>
-<li>Record the flowfiles in the "Final" Connection, when they coincide with the "Initial" flowfile turn off the "Middle" processor and turn on the "Final" processor.</li>
-<li>The flowfiles in the "Final" connection get consumed by the "Final" processor and the initial state of the dataflow is recovered.</li>
-</ol>
+<p><em>4</em>. Record the flowfiles in the "Final" Connection, when they coincide with the "Initial" flowfile turn off the "Middle" processor and turn on the "Final" processor.</p>
+<p><em>5</em>. The flowfiles in the "Final" connection get consumed by the "Final" processor and the initial state of the dataflow is recovered.</p>
 
 </div>
 </div>
@@ -130,7 +122,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The Nifi cluster used for testing is in the <em>Cloudera Public Cloud</em> and needs basic authentication credentials for accessing. The following environmental variables are necessary to access the cluster:</p>
+<p>The Nifi cluster used for testing is in the <em>Cloudera Public Cloud</em> and needs basic authentication credentials for accessing. The following are the environment variables required to access the cluster:</p>
 
 </div>
 </div>
@@ -154,7 +146,7 @@ nb_path: "nbs/index.ipynb"
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>For a <code>pip</code> installation run:</p>
+<p><strong>nipi_api</strong> is in <code>pip</code> and can be installed by running:</p>
 
 </div>
 </div>

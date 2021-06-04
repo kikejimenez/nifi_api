@@ -43,13 +43,13 @@ def is_valid_csv(file):
 # Cell
 
 
-def get_valid_names_in_connector(list_queues):
+def get_valid_names_in_connector(list_queues, nifi_attribute='filename'):
     """ Gets a list of valid names from the list of queues
     """
     flowfile_summaries = list_queues['listingRequest']['flowFileSummaries']
     valid_uuids = [
-        ff['filename']
+        ff[nifi_attribute]
         for ff in flowfile_summaries
-        if is_valid_csv(ff['filename'])
+        if is_valid_csv(ff[nifi_attribute])
     ]
     return valid_uuids

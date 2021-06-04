@@ -1,0 +1,36 @@
+package:
+  name: nifi_api
+  version: 0.0.2
+source:
+  sha256: b6832c9b2a642a32e20e1088b8f47881d25fd2de257e6e65e5f70d4a0cf95e14
+  url: https://files.pythonhosted.org/packages/f9/13/47faedeeb20d3a9c881171719f330e5d326a90d62ec98a43987f7f9e801e/nifi_api-0.0.2.tar.gz
+about:
+  dev_url: https://kikejimenez.github.io
+  doc_url: https://kikejimenez.github.io
+  home: https://kikejimenez.github.io
+  license: Apache Software
+  license_family: APACHE
+  summary: Scripts for the NIFI API
+build:
+  noarch: python
+  number: '0'
+  script: '{{ PYTHON }} -m pip install . -vv'
+extra:
+  recipe-maintainers:
+  - kikejimenez
+requirements:
+  host:
+  - pip
+  - python
+  - packaging
+  - requests
+  - json
+  run:
+  - pip
+  - python
+  - packaging
+  - requests
+  - json
+test:
+  imports:
+  - nifi_api

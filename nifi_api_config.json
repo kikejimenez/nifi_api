@@ -3,7 +3,7 @@
         "SourceToRaw": {
             "in_connection": {
                 "type": "SuccessConnection",
-                "Id": "ce6d3d47-ee24-16d2-919d-a598e5027060",
+                "Id": "42ac34ef-bf95-15b7-b5de-167fbdc77d36",
                 "description": "Set Schemas: Input Port"
             },
             "in_processor": {
@@ -30,39 +30,39 @@
         "RawToDiscovery": {
             "in_connection": {
                 "type": "SuccessConnection",
-                "Id": "b9573948-7e4f-1a68-a027-eecb9ace395d",
+                "Id": "05dd3e2b-8abb-1350-ffff-ffffd98a3fe8",
                 "description": "Update Tables: Input Port"
             },
             "in_processor": {
                 "type": "GenerateFlowfile",
-                "Id": "5d1e3da9-d96a-113d-a78a-56aee3a0ffed",
+                "Id": "f2003320-a8aa-1cb1-bc26-a77dc2b879ab",
                 "description": "Start Pipeline"
             },
             "middle_processor": {
-                "type": "ReplaceText",
-                "Id": "b34b3472-9be1-173a-8387-d5b0f2578e6d",
-                "description": "Update Tables: Prepare Query"
+                "type": "UpdateAttribute",
+                "Id": "1b3e3a31-5590-1a54-bd76-ed416606e622",
+                "description": "Update Tables:Start"
             },
             "out_connection": {
                 "type": "SuccessConnection",
-                "Id": "46ce3ce0-5f95-1ef0-a749-ab9ca320e4b9",
+                "Id": "12963387-960c-16a1-84e1-27611b65b5be",
                 "description": "Log & Terminate: Funnel --> Log JSON"
             },
             "out_processor": {
-                "type": "LogAttribute",
-                "Id": "a98a73c6-0178-1000-ffff-ffff85fa33cf",
-                "description": "Log & Terminate: LogAttribute"
+                "type": "AttributeToJSON",
+                "Id": "914e3292-d70e-1e28-ab79-f62706f58376",
+                "description": "Logs JSON generates JSON for S3 bucket"
             }
         },
         "DiscoveryToRefined": {
             "in_connection": {
                 "type": "SuccessConnection",
-                "Id": "b9573948-7e4f-1a68-a027-eecb9ace395d",
+                "Id": "ce3c30d9-67c4-1563-a839-060ddeecfcec",
                 "description": "Update Tables: Input Port"
             },
             "in_processor": {
                 "type": "GenerateFlowfile",
-                "Id": "5d1e3da9-d96a-113d-a78a-56aee3a0ffed",
+                "Id": "229d3f70-b6bf-13cb-ad45-74a524359489",
                 "description": "Start Pipeline"
             },
             "middle_processor": {
@@ -72,13 +72,13 @@
             },
             "out_connection": {
                 "type": "SuccessConnection",
-                "Id": "46ce3ce0-5f95-1ef0-a749-ab9ca320e4b9",
-                "description": "Log & Terminate: Funnel --> LogAttribute"
+                "Id": "8ee2331e-562d-11dc-9ed6-7b9b45b6a702",
+                "description": "Log & Terminate: Funnel --> Log JSON"
             },
             "out_processor": {
                 "type": "AttributeToJSON",
-                "Id": "a98a73c6-0178-1000-ffff-ffff85fa33cf",
-                "description": "Log & Attribute: LogAttribute"
+                "Id": "55cc3043-ffa3-18bb-aead-27e95f40e5c1",
+                "description": "Logs JSON generates JSON for S3 bucket"
             }
         }
     }
